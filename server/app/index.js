@@ -1,21 +1,24 @@
-const Koa = require('koa');
-const app = new Koa();
 const db = require('./db');
-sequelize.sync()
-  .then(() => User.create({
-    email: 'jdjdjd',
-    password:"ddddd",
-    display_name:'dddd'
-  }))
-  .then(hel => {
-    console.log(hel.toJSON());
-  });
+const authPlugin = require('./auth');
+const express = require('express');
 
-app.use(async ctx => {
-  const answer =  await User.findAll().then(hellows => {
-    return JSON.stringify(hellows);
-  })
-  ctx.body = answer;
-});
+const app = express();
 
-app.listen(3000);
+
+app.get('/ping', (req, res) => {
+  res.send('pong');
+})
+
+app
+  .use(require('morgan')('combined'))
+  .use(require('cookie-parser')())
+  .use(require('body-parser').json())
+  .use(require('express-session')({ secret: 'ULTRPD', resave: false, saveUninitialized: false }));
+
+authPlugin(app);
+
+
+
+app.get('/', (req, res) => res.json({hello: 'world'}))
+
+app.listen(3000, () => console.log('PORT 3000'));
