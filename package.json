@@ -1,0 +1,20 @@
+{
+  "name": "ultrapad-3000",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepush": "npm --prefix='./client' run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://vbifonixor@bitbucket.org/vbifonixor/ultrapad-3000.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/vbifonixor/ultrapad-3000#readme",
+  "devDependencies": {
+    "husky": "^0.14.3"
+  }
+}
