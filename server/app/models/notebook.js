@@ -5,7 +5,7 @@ const Notebook = db.define('notebook', {
     name:Sequelize.STRING,
     color:Sequelize.STRING,
   });
-  Notebook.hasMany(Note);
-  Notebook.sync();
+Notebook.hasMany(Note);
+Notebook.sync();
 
-  module.exports = Notebook;
+module.exports = Notebook;

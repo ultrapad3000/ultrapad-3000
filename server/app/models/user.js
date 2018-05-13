@@ -8,4 +8,5 @@ const User = db.define('user', {
   });
   User.hasMany(Notebook);
   User.sync();
+
 module.exports = User;
