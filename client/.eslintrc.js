@@ -1,6 +1,7 @@
 module.exports = {
   extends: ['react-app', 'airbnb-standard'],
   rules: {
+    'prefer-destructuring': 'off',
     'no-extra-semi': 2,
     'semi': [2, 'never'],
     'comma-dangle': ['error', 'never'],
