@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 const tags = require('./tags');
-const Note = sequelize.define('note', {
+const Note = db.define('note', {
     name:Sequelize.STRING,
     content:Sequelize.STRING,
 });
