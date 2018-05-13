@@ -1,6 +1,7 @@
 const Koa = require('koa');
 const app = new Koa();
 const db = require('./db');
+
 sequelize.sync()
   .then(() => User.create({
     email: 'jdjdjd',
