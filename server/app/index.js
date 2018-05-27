@@ -4,6 +4,7 @@ const express = require('express');
 
 const app = express();
 
+const NotebookController = require('./controllers/notebook.controller')
 
 app.get('/ping', (req, res) => {
   res.send('pong');
@@ -20,5 +21,7 @@ authPlugin(app);
 
 
 app.get('/', (req, res) => res.json({hello: 'world'}))
+
+app.use(NotebookController.router)
 
 app.listen(3000, () => console.log('PORT 3000'));
