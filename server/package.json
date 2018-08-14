@@ -22,7 +22,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "sequelize": "^4.37.7",
-    "sqlite3": "^4.0.0"
+    "sqlite3": "^4.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.17.4"

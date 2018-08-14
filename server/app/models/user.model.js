@@ -1,7 +1,5 @@
 const db = require('../db');
-
 const Notebook = require('./notebook.model')
-
 const {STRING} = require('sequelize')
 
 const User = db.define('user', {

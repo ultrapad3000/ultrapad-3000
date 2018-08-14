@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
-const Note = require('./note');
+const Note = require('./note.model');
 const User = require('./user.model');
 const Notebook = db.define('notebook', {
     name: Sequelize.STRING,
