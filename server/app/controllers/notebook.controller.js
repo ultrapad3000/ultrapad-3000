@@ -1,10 +1,7 @@
-const User = require('../models/user.model')
-const Notebook = require('../models/notebook.model')
-
-const router = new require('express').Router()
-
+const Router = require('express').Router
 const passport = require('passport')
 
+const router = new Router()
 router.use(passport.authenticate('jwt'))
 
 const controller = {
@@ -59,7 +56,7 @@ router
 
         res.status(200).send(deleted)
     })
-    .get('/notebook/:id', async(req, res) => {
+    .get('/notebook/:id', async (req, res) => {
         const {id} = req.params
         const found = await controller.readOne(id, req.user)
 
@@ -69,7 +66,7 @@ router
 
         res.status(200).send(found)
     })
-    .put('/notebook/:id', async(req, res) => {
+    .put('/notebook/:id', async (req, res) => {
         const {id} = req.params
         const options = req.body
         const {user} = req
@@ -78,6 +75,5 @@ router
 
         res.status(200).send(edited)
     })
-
 
 module.exports = {router, controller}

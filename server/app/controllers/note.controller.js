@@ -1,10 +1,11 @@
-const { Op } = require('sequelize')
+const {Op} = require('sequelize')
 
-const User = require('../models/user.model')
-const Notebook = require('../models/notebook.model')
-const Note = require('../models/note.model')
+const Notebook = require('@srv/models/notebook.model')
+const Note = require('@srv/models/note.model')
 
-const router = new require('express').Router()
+const {Router} = require('express')
+
+const router = new Router()
 
 const passport = require('passport')
 
@@ -13,27 +14,25 @@ router.use(passport.authenticate('jwt'))
 const controller = {
     async readAllNotes(user) {
         const allNotebooks = await user.getNotebooks()
-        const allNotebooksIds = allNotebooks.map((notebook) => {
-            return notebook.id
-        })
-        const allNotes = await Note.findAll({ where: { notebookId: { [Op.or]: allNotebooksIds } } })
+        const allNotebooksIds = allNotebooks.map(notebook => notebook.id)
+        const allNotes = await Note.findAll({where: {notebookId: {[Op.or]: allNotebooksIds}}})
         return allNotes
     },
 
-    async readAllNotesByNotebook(notebook, user) {
+    async readAllNotesByNotebook(notebook) {
         const notebookObject = await Notebook.findById(notebook)
         const notes = await notebookObject.getNotes()
         return notes
     },
 
     async readOne(id, notebookId, user) {
-        const doesNotebookBelongsToUser = await user && user.getNotebooks({ where: { id: notebookId } })
+        const doesNotebookBelongsToUser = await user && user.getNotebooks({where: {id: notebookId}})
         if (!Boolean(doesNotebookBelongsToUser)) {
             const notebookNotFoundError = new Error(`User ${user.id} does not have notebook ${notebookId}`)
             notebookNotFoundError.type = 'notebookNotFound'
             throw notebookNotFoundError
         }
-        const note = await Note.find({ where: { [Op.and]: { notebookId, id } } })
+        const note = await Note.find({where: {[Op.and]: {notebookId, id}}})
         if (!Boolean(note)) {
             const noteNotFoundError = new Error(`Note ${id} not found`)
             noteNotFoundError.type = 'noteNotFound' // TODO: work on errors
@@ -43,7 +42,7 @@ const controller = {
     },
     async create({name, content}, notebookId, user) {
         try {
-            const doesNotebookBelongsToUser = await user.getNotebooks({ where: { id: notebookId } })
+            const doesNotebookBelongsToUser = await user.getNotebooks({where: {id: notebookId}})
             if (!Boolean(doesNotebookBelongsToUser)) {
                 const notebookNotFoundError = new Error(`User ${user.id} does not have notebook ${notebookId}`)
                 notebookNotFoundError.type = 'notebookNotFound'
@@ -83,12 +82,12 @@ router
         res.status(200).send(allFound)
     })
     .get('/notebook/:notebookId/notes', async (req, res) => {
-        const { notebookId } = req.params
+        const {notebookId} = req.params
         const allFound = await controller.readAllNotesByNotebook(notebookId, req.user)
         res.status(200).send(allFound)
     })
     .get('/notebook/:notebookId/notes/:noteId', async (req, res) => {
-        const { notebookId, noteId } = req.params
+        const {notebookId, noteId} = req.params
         try {
             const note = await controller.readOne(noteId, notebookId, req.user)
             res.status(200).send(note)
@@ -100,10 +99,10 @@ router
         }
     })
     .post('/notebook/:notebookId/notes', async (req, res) => {
-        const { name, content } = req.body
-        const { notebookId } = req.params
+        const {name, content} = req.body
+        const {notebookId} = req.params
         try {
-            const created = await controller.create({ name, content }, notebookId, req.user)
+            const created = await controller.create({name, content}, notebookId, req.user)
             res.status(200).send(created)
         } catch (e) {
             if (e.type === 'notebookNotFound') {
@@ -113,8 +112,8 @@ router
         }
     })
     .delete('/notebook/:notebookId/notes/:id', async (req, res) => {
-        const { id, notebookId } = req.params
-        const { user } = req
+        const {id, notebookId} = req.params
+        const {user} = req
 
         try {
             const deleted = await controller.delete(id, notebookId, user)
@@ -127,9 +126,9 @@ router
         }
     })
     .put('/notebook/:notebookId/notes/:id', async (req, res) => {
-        const { id, notebookId } = req.params
+        const {id, notebookId} = req.params
         const options = req.body
-        const { user } = req
+        const {user} = req
 
         try {
             const edited = await controller.edit(id, notebookId, options, user)
@@ -142,5 +141,4 @@ router
         }
     })
 
-
-module.exports = { router, controller }
+module.exports = {router, controller}

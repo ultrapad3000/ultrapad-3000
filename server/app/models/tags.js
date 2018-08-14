@@ -1,9 +1,8 @@
 const db = require('@srv/db')
 const Sequelize = require('sequelize')
-const Tag = db.define('tag', {
+const Tags = db.define('notebook', {
     name: Sequelize.STRING
 })
+Tags.sync()
 
-Tag.sync()
-
-module.exports = Tag
+module.exports = Tags

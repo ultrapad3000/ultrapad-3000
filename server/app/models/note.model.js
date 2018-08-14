@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize')
-const db = require('../db')
-const Tag = require('./tag.model')
-const Notebook = require('./notebook.model')
+const db = require('@srv/db')
+const Tag = require('@srv/models/tag.model')
 
 const Note = db.define('note', {
     name: Sequelize.STRING,
@@ -15,7 +14,7 @@ const Note = db.define('note', {
     }
 })
 
-Note.belongsToMany(Tag, { through: 'Notes_to_Tags' })
+Note.belongsToMany(Tag, {through: 'Notes_to_Tags'})
 Note.sync()
 
 module.exports = Note
