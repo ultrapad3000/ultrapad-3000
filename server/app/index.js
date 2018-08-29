@@ -3,6 +3,7 @@ require('module-alias/register')
 const express = require('express')
 
 const authPlugin = require('@srv/auth')
+const errorHandlerMiddleware = require('@srv/error')
 
 const NotebookController = require('@srv/controllers/notebook.controller')
 const NoteController = require('@srv/controllers/note.controller')
@@ -21,9 +22,9 @@ app
 
 authPlugin(app)
 
-app.get('/', (req, res) => res.json({hello: 'world'}))
-
-app.use(NotebookController.router)
-app.use(NoteController.router)
+app
+    .use(NotebookController.router)
+    .use(NoteController.router)
+    .use(errorHandlerMiddleware)
 
 app.listen(3000)
