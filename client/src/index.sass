@@ -1,0 +1,33 @@
+@charset 'utf-8'
+
+@import 'assets/sass/reset.sass'
+@import 'assets/sass/utils/all.sass'
+
+html
+  min-width: 300px
+  overflow-x: hidden
+  overflow-y: scroll
+  font-size: $font-size
+  text-rendering: optimizeLegibility
+  text-size-adjust: 100%
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
+  -ms-overflow-style: scrollbar
+  -webkit-tap-highlight-color: transparent
+  -webkit-overflow-scrolling: touch
+
+body
+  color: $color-text
+  font-family: $font-family
+  font-size: 1rem
+  font-weight: normal
+  line-height: 1.42
+
+a
+  text-decoration: underline
+  &:active
+    text-decoration: none
+
+body
+  background-color: $color-bg
+  padding: 60px

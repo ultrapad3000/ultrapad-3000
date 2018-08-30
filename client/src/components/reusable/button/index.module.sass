@@ -1,0 +1,22 @@
+@import '~@/assets/sass/utils/_all.sass'
+
+.root
+  +control
+  +unselectable
+  justify-content: center
+  height: 40px
+  padding: 0 24px
+  cursor: pointer
+  background-color: $color-accent
+  border-radius: $border-radius
+  color: #fff
+  white-space: nowrap
+  text-align: center
+  text-decoration: none
+  &:active
+    background-color: darken($color-accent, 10%)
+  &[disabled]
+    opacity: $color-bg-disabled
+  &_fullwidth
+    display: flex
+    width: 100%

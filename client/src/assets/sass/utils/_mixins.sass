@@ -1,0 +1,54 @@
+
+=transition($property: all, $duration: 200ms, $function: ease, $delay: 0)
+  transition-property: $property
+  transition-duration: $duration
+  transition-timing-function: $function
+
+  @if $delay > 0
+    transition-delay: $delay
+
+=textoverflow
+  overflow: hidden
+  white-space: nowrap
+  text-overflow: ellipsis
+
+=control
+  position: relative
+  display: inline-flex
+  justify-content: flex-start
+  align-items: center
+  border: 1px solid transparent
+  box-shadow: none
+  font-size: inherit
+  line-height: 1.5
+  vertical-align: top
+  -moz-appearance: none
+  -webkit-appearance: none
+  &:focus,
+  &:active
+    outline: none
+  &[disabled]
+    cursor: not-allowed
+
+
+/*! Bulma v0.6.1 | MIT License | github.com/jgthms/bulma */
+
+=overlay($offset: 0)
+  bottom: $offset
+  left: $offset
+  position: absolute
+  right: $offset
+  top: $offset
+
+=placeholder
+  $placeholders: ':-moz' ':-webkit-input' '-moz' '-ms-input'
+  @each $placeholder in $placeholders
+    &:#{$placeholder}-placeholder
+      @content
+
+=unselectable
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
