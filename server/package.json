@@ -8,6 +8,7 @@
     "start": "nodemon app/index.js",
     "start:pm2": "pm2 start app/index.js",
     "pm2": "pm2",
+    "stop": "pm2 stop index",
     "lint": "eslint -f pretty ."
   },
   "keywords": [],
