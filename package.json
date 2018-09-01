@@ -5,7 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepush": "npm --prefix='./client' run lint && npm --prefix='./server' run lint"
+    "prepush": "npm run lint:all",
+    "lint:client": "npm --prefix='./client' run lint",
+    "lint:server": "npm --prefix='./server' run lint",
+    "lint:all": "npm run lint:server && npm run lint:client",
+    "install:all": "npm install && npm --prefix='./client' install && npm --prefix='./server' install",
+    "install:all-prod": "npm install --production && npm --prefix='./client' install --unsafe-perms && npm --prefix='./server' install  --unsafe-perms",
+    "start:server": "npm --prefix='./server' run start:pm2",
+    "start:client": "npm --prefix='./client' run start",
+    "stop:server": "npm --prefix='./server' run stop",
+    "clean": "rm -rf node_modules && rm -rf ./client/node_modules && rm -rf ./server/node_modules && rm -rf ./client/build && npm run stop:server",
+    "build:client": "npm --prefix='./client' run build"
   },
   "repository": {
     "type": "git",
