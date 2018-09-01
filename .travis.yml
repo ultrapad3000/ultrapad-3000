@@ -1,14 +1,13 @@
 language: node_js
 node_js:
   - "10.1"
-jobs:
-  include:
-    - stage: "Install"
-      script: npm run install:all-prod
-    - stage: "Build"  
-      script: npm run build:client
-    - stage: "Deploy"
-      provider: script
-      script: bash scripts/deploy.sh
-      on:
-        branch: nginx
+install:
+  - npm run install:all-prod
+  - npm run build:client
+script:
+  - echo "IZI PIZI LEMON SQEEZI"
+deploy:
+  provider: script
+  script: bash scripts/deploy.sh
+  on:
+    branch: nginx
