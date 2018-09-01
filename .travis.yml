@@ -3,9 +3,9 @@ node_js:
   - "10.1"
 jobs:
   include:
-    - stage: "Tests"
-      name: "Install"
+    - stage: "Install"
       script: npm run install:all-prod
+    - stage: "Build"  
       script: npm run build:client
     - stage: "Deploy"
       provider: script
