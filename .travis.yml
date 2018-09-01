@@ -6,3 +6,8 @@ install:
   - npm run build:client
 script:
   - echo "0" && exit 0
+deploy:
+  provider: script
+  script: bash scripts/deploy.sh
+  on:
+    branch: nginx
