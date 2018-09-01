@@ -6,10 +6,9 @@ jobs:
     - stage: "Tests"
       name: "Install"
       script: npm run install:all-prod
-    - name: "Build"
       script: npm run build:client
-deploy:
-  provider: script
-  script: bash scripts/deploy.sh
-  on:
-    branch: nginx
+    - stage: "Deploy"
+      provider: script
+      script: bash scripts/deploy.sh
+      on:
+        branch: nginx
