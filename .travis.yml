@@ -4,3 +4,5 @@ node_js:
 install:
   - npm run install:all-prod
   - npm run build:client
+script:
+  - echo "0" && exit 0
